@@ -1,5 +1,9 @@
 # Jackson 3 JSON Validation
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.dogrulabs/jackson3-json-validation?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.dogrulabs/jackson3-json-validation)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/dogrulabs/jackson3-json-validation/ci.yml?branch=main)](https://github.com/dogrulabs/jackson3-json-validation/actions)
+[![License](https://img.shields.io/github/license/dogrulabs/jackson3-json-validation)](LICENSE)
+
 A lightweight Java library for validating JSON against Java DTOs using **Jackson 3** and **Jakarta Bean Validation**.
 
 It avoids JSON Schema complexity by treating your Java classes (DTOs) as the schema definition.
@@ -9,8 +13,9 @@ It avoids JSON Schema complexity by treating your Java classes (DTOs) as the sch
 - **Java 17** baseline.
 - **Jackson 3** (`tools.jackson.*`) for JSON parsing and binding.
 - **Jakarta Bean Validation 3.0+** for constraints (e.g. `@NotNull`, `@Size`).
-- Simple, functional API returning a clear `ValidationResult`.
-- No heavy frameworks (Spring, etc.) required.
+- **Zero Boilerplate**: No manual schema definition required.
+- **Simple API**: Functional API returning a clear `ValidationResult`.
+- **Lightweight**: No heavy frameworks (Spring, etc.) required.
 
 ## Installation
 
@@ -20,7 +25,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.dogrulabs</groupId>
     <artifactId>jackson3-json-validation</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
