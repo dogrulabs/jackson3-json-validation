@@ -8,18 +8,18 @@ A lightweight Java library for validating JSON against Java DTOs using **Jackson
 
 It avoids JSON Schema complexity by treating your Java classes (DTOs) as the schema definition.
 
-## Features
+## 📚 Documentation
 
-- **Java 17** baseline.
-- **Jackson 3** (`tools.jackson.*`) for JSON parsing and binding.
-- **Jakarta Bean Validation 3.0+** for constraints (e.g. `@NotNull`, `@Size`).
-- **Zero Boilerplate**: No manual schema definition required.
-- **Simple API**: Functional API returning a clear `ValidationResult`.
-- **Lightweight**: No heavy frameworks (Spring, etc.) required.
+Detailed documentation is available in the `docs` folder:
 
-## Installation
+- [**Getting Started**](docs/getting-started.md): Installation and basic "Hello World" example.
+- [**Advanced Usage**](docs/advanced-usage.md): Nested validation, collections, and custom constraints.
+- [**Configuration**](docs/configuration.md): Customizing the Jackson Mapper and Validator.
+- [**Error Handling**](docs/error-handling.md): Understanding and using `ValidationResult`.
 
-Add the dependency to your `pom.xml`:
+## 🚀 Quick Start
+
+### 1. Install
 
 ```xml
 <dependency>
@@ -29,75 +29,31 @@ Add the dependency to your `pom.xml`:
 </dependency>
 ```
 
-## Usage
-
-### 1. Define your DTOs
-
-Use standard Jakarta Validation annotations:
+### 2. Validate
 
 ```java
-import jakarta.validation.constraints.*;
-// ... package definition
-
+// 1. Define DTO
 public class UserDto {
     @NotNull
-    private String username;
+    public String username;
+}
 
-    @Email
-    private String email;
+// 2. Validate
+JsonValidator validator = JsonValidators.defaultValidator();
+ValidationResult result = validator.validate("{\"username\": null}", UserDto.class);
 
-    @Min(18)
-    private int age;
-    
-    // getters setters
+if (!result.valid()) {
+    System.out.println(result.errors()); // [ValidationError(path=username, message=must not be null)]
 }
 ```
 
-### 2. Validate JSON
+## Features
 
-```java
-import io.github.dogrulabs.jsonvalidation.JsonValidator;
-import io.github.dogrulabs.jsonvalidation.JsonValidators;
-import io.github.dogrulabs.jsonvalidation.ValidationResult;
-
-public class Main {
-    public static void main(String[] args) {
-        // Create default validator
-        JsonValidator validator = JsonValidators.defaultValidator();
-
-        String json = """
-            {
-                "username": "user1",
-                "email": "invalid-email",
-                "age": 10
-            }
-        """;
-
-        // Validate
-        ValidationResult result = validator.validate(json, UserDto.class);
-
-        if (!result.valid()) {
-            System.out.println("JSON is invalid:");
-            result.errors().forEach(err -> 
-                System.out.printf("- Field: %s, Message: %s (Value: %s)%n", 
-                    err.path(), err.message(), err.rejectedValue())
-            );
-        } else {
-            System.out.println("JSON is valid!");
-        }
-    }
-}
-```
-
-### 3. Syntax Check Only
-
-If you only want to check if the string is valid JSON (well-formed):
-
-```java
-ValidationResult result = validator.validateSyntax("{ broken: json ");
-// result.valid() -> false
-// result.errors() -> ["Invalid JSON syntax: ..."]
-```
+- **Java 17** baseline.
+- **Jackson 3** (`tools.jackson.*`) for JSON parsing and binding.
+- **Jakarta Bean Validation 3.0+** for constraints.
+- **Zero Boilerplate**: No manual schema definition required.
+- **Simple API**: Functional API returning a clear `ValidationResult`.
 
 ## Contributing
 
