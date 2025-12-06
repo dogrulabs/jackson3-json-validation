@@ -4,12 +4,13 @@ This guide describes how to release a new version of `jackson3-json-validation` 
 
 ## Prerequisites
 
-1.  **Sonatype Account**: You need a JIRA account on [issues.sonatype.org](https://issues.sonatype.org).
-2.  **GroupId Access**: You must have access to `io.github.dogrulabs` (requires verifying GitHub repo ownership).
-3.  **GPG Keys**: You need a GPG key pair to sign artifacts.
-4.  **GitHub Secrets**:
-    *   `SONATYPE_USERNAME`: Your Sonatype JIRA username.
-    *   `SONATYPE_PASSWORD`: Your Sonatype JIRA password (or user token).
+1.  **Central Portal Account**: Sign in to [central.sonatype.com](https://central.sonatype.com) (use "Sign in with GitHub").
+2.  **Namespace Verification**: In the portal, verify you own `io.github.dogrulabs` (the portal will guide you to create a temporary repo or DNS record).
+3.  **User Token**: Generate a User Token from your Account settings (top right menu > View Account > Generate User Token).
+4.  **GPG Keys**: You need a GPG key pair to sign artifacts.
+5.  **GitHub Secrets**:
+    *   `CENTRAL_USERNAME`: The username from your generated token.
+    *   `CENTRAL_TOKEN`: The password from your generated token.
     *   `GPG_PRIVATE_KEY`: Your ASCII-armored private key.
     *   `GPG_PASSPHRASE`: Passphrase for your GPG key.
 
